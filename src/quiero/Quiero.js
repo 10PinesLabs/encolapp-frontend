@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react';
 
 class Quiero extends Component {
     constructor(props){
@@ -19,7 +20,7 @@ class Quiero extends Component {
     render() {
         return (
             <div className="Accion">
-                <button onClick={() => this.handleClick()}>{this.state.accion}</button>
+                <Button primary onClick={() => this.handleClick()}>{this.state.accion}</Button>
             </div>
         );
     }
