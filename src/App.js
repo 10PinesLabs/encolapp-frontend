@@ -30,7 +30,6 @@ class App extends Component {
                 return response.json();
             })
             .then(lista => {
-                console.log('vino:',lista);
                 if( lista.length === 0){
                     this.setState({
                         siguientes : [],
