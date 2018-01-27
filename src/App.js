@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Hablando from './hablando/Hablando';
 import PorHablar from './porHablar/PorHablar';
 import Quiero from './quiero/Quiero';
+import { Grid , Divider} from 'semantic-ui-react'
 
 class App extends Component {
     constructor(props) {
@@ -11,11 +11,12 @@ class App extends Component {
         this.state = {
             hablando: {
                 "nombre": "Lucas G",
+                "para" : 5
             },
             siguentes: [
-                {"nombre": "Dario"},
-                {"nombre": "Santi"},
-                {"nombre": "Gaston"}
+                {"nombre": "Dario", "tiempo": 8},
+                {"nombre": "Santi", "tiempo": 4},
+                {"nombre": "Gaston", "tiempo": 2}
             ]
         }
     }
@@ -23,13 +24,23 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Bienvenido a mis Colas</h1>
-        </header>
-        <Hablando quien={this.state.hablando}/>
-        <PorHablar esperando={this.state.siguentes}/>
-        <Quiero />
+          <h1 className="ui header">EnColaPP</h1>
+          <Divider />
+
+          <Grid centered>
+                  <Grid.Row >
+                      <Hablando quien={this.state.hablando}/>
+                  </Grid.Row>
+                  <Grid.Row>
+                      <Grid.Column>
+                        <PorHablar esperando={this.state.siguentes}/>
+                      </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                        <Quiero />
+                  </Grid.Row>
+          </Grid>
+
 
       </div>
     );

@@ -20,7 +20,7 @@ class Quiero extends Component {
     render() {
         return (
             <div className="Accion">
-                <Button primary onClick={() => this.handleClick()}>{this.state.accion}</Button>
+                <Button primary onClick={() => this.handleClick()} size={'massive'}>{this.state.accion}</Button>
             </div>
         );
     }
