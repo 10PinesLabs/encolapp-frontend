@@ -1,3 +1,4 @@
+import Config from '../Config';
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 
@@ -13,12 +14,12 @@ class Quiero extends Component {
     }
 
     handleClick(){
-        var url = 'https://encolapp-backend.herokuapp.com/';
+        var url;
         if(this.state.evento === 'ENCOLARSE'){
-            url = url + 'encolarse';
+            url = Config.API_ENDPOINT + '/encolarse';
             this.setState({evento : 'DESENCOLARSE'});
         }else{
-            url = url + 'desencolarse';
+            url = Config.API_ENDPOINT + '/desencolarse';
             this.setState({evento : 'ENCOLARSE'});
         }
 
