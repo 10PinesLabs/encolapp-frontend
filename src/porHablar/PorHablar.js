@@ -3,7 +3,6 @@ import { List, Header, Container, Divider } from 'semantic-ui-react'
 
 class PorHablar extends Component {
     listaPorHablar(esperando){
-        console.log('Todos:',esperando);
         return esperando.map( enEspera =>
             <List.Item key={enEspera.nombre}>
                 <List.Icon name='github' size='large' />

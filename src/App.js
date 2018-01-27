@@ -10,19 +10,21 @@ class App extends Component {
         super(props);
         this.state = {
             hablando: {
-                "nombre": "Lucas G",
+                "nombre": "Hardcoded 1",
                 "para": 5
             },
             siguientes: [
-                {"nombre": "Dario", "tiempo": 8},
-                {"nombre": "Santi", "tiempo": 4},
-                {"nombre": "Gaston", "tiempo": 2}
-            ]
-        }
+                {"nombre": "Hardcoded 1", "tiempo": 8},
+                {"nombre": "Hardcoded 2", "tiempo": 4},
+                {"nombre": "Hardcoded 3", "tiempo": 2}
+            ],
+            yo: {"nombre": "Ludat"}
+        };
+        window.setInterval(() => this.actualizarCola(), 10000);
+
     }
 
-
-    componentDidMount() {
+    actualizarCola(){
         fetch('https://encolapp-backend.herokuapp.com/cola', {method: 'GET'})
             .then(response => {
                 return response.json();
@@ -41,13 +43,15 @@ class App extends Component {
                     siguientes : lista.slice(1, lista.size)
                 });
             });
+    }
 
+    componentDidMount() {
+        this.actualizarCola();
     }
 
     render() {
         return (
             <div className="App">
-                <Divider/>
                 <Header as='h1' className="ui header">EnColaPP</Header>
                 <Divider/>
 
@@ -61,7 +65,7 @@ class App extends Component {
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
-                        <Quiero/>
+                        <Quiero soy={this.state.yo}/>
                     </Grid.Row>
                 </Grid>
 

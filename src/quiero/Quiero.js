@@ -6,11 +6,33 @@ class Quiero extends Component {
         super(props);
         this.state= {
             accion : 'Quiero hablar!',
-            proximo : 'Ya no quiero'
+            proximo : 'Ya no quiero',
+            evento: 'ENCOLARSE'
+
         };
     }
 
     handleClick(){
+        var url = 'https://encolapp-backend.herokuapp.com/';
+        if(this.state.evento === 'ENCOLARSE'){
+            url = url + 'encolarse';
+            this.setState({evento : 'DESENCOLARSE'});
+        }else{
+            url = url + 'desencolarse';
+            this.setState({evento : 'ENCOLARSE'});
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nombre: this.props.soy.nombre
+            })
+        });
+
         this.setState({
             accion : this.state.proximo ,
             proximo: this.state.accion
