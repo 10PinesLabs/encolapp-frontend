@@ -29,7 +29,7 @@ class Quiero extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                nombre: this.props.soy.nombre
+                nombre: this.props.soy
             })
         });
 
@@ -43,6 +43,7 @@ class Quiero extends Component {
         return (
             <div className="Accion">
                 <Button primary onClick={() => this.handleClick()} size={'massive'}>{this.state.accion}</Button>
+
             </div>
         );
     }

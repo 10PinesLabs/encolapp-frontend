@@ -18,9 +18,8 @@ class Contenido extends Component {
                 {"nombre": "Hardcoded 2", "tiempo": 4},
                 {"nombre": "Hardcoded 3", "tiempo": 2}
             ],
-            yo: {"nombre": "Ludat"}
         };
-        window.setInterval(() => this.actualizarCola(), 10000);
+        window.setInterval(() => this.actualizarCola(), 5000);
 
     }
 
@@ -65,7 +64,7 @@ class Contenido extends Component {
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
-                        <Quiero soy={this.state.yo}/>
+                        <Quiero soy={this.props.soy}/>
                     </Grid.Row>
                 </Grid>
 
