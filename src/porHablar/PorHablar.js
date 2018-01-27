@@ -8,7 +8,6 @@ class PorHablar extends Component {
                 <List.Icon name='github' size='large' />
                 <List.Content>
                     <List.Header as='a'>{enEspera.nombre}</List.Header>
-                    <List.Description as='span'>Esperando hace {enEspera.tiempo} minutos</List.Description>
                 </List.Content>
             </List.Item>
         );

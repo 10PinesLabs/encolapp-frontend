@@ -1,6 +1,6 @@
 import Config from '../Config';
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Label, Grid } from 'semantic-ui-react';
 
 class Quiero extends Component {
     constructor(props){
@@ -14,7 +14,7 @@ class Quiero extends Component {
     }
 
     handleClick(){
-        var url;
+        let url;
         if(this.state.evento === 'ENCOLARSE'){
             url = Config.API_ENDPOINT + '/encolarse';
             this.setState({evento : 'DESENCOLARSE'});
@@ -43,7 +43,17 @@ class Quiero extends Component {
     render() {
         return (
             <div className="Accion">
-                <Button primary onClick={() => this.handleClick()} size={'massive'}>{this.state.accion}</Button>
+                <Grid centered>
+                    <Grid.Row>
+                        <Button primary onClick={() => this.handleClick()} size={'massive'}>{this.state.accion}</Button>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Label image>
+                            {this.props.soy}
+                            <Label.Detail>:)</Label.Detail>
+                        </Label>
+                    </Grid.Row>
+                </Grid>
 
             </div>
         );
