@@ -20,7 +20,7 @@ class Contenido extends Component {
                 {"nombre": "Hardcoded 3", "tiempo": 2}
             ],
         };
-        window.setInterval(() => this.actualizarCola(), 5000);
+        window.setInterval(() => this.actualizarCola(), 1000);
 
     }
 
