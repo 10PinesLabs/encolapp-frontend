@@ -1,3 +1,4 @@
+import Config from './Config';
 import React, {Component} from 'react';
 import './App.css';
 import Hablando from './hablando/Hablando';
@@ -24,7 +25,7 @@ class Contenido extends Component {
     }
 
     actualizarCola(){
-        fetch('https://encolapp-backend.herokuapp.com/cola', {method: 'GET'})
+        fetch(Config.API_ENDPOINT + '/cola', {method: 'GET'})
             .then(response => {
                 return response.json();
             })
