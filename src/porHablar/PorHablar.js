@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Header, Container } from 'semantic-ui-react'
+import { List, Header, Container, Divider } from 'semantic-ui-react'
 
 class PorHablar extends Component {
     listaPorHablar(esperando){
@@ -23,6 +23,7 @@ class PorHablar extends Component {
                     content='Siguen'
                     textAlign='center'
                 />
+                <Divider/>
                 <Container>
                     <List divided relaxed size={'big'}>
                         {this.listaPorHablar(this.props.esperando)}
