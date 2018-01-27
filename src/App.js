@@ -19,6 +19,10 @@ export default class App extends Component {
         return (
             <Router>
                 <div>
+                    <Route exact path="/"
+                           render = {(props) =>
+                               <Login {...props} onSubmit={(nombre) => this.handleLogin(nombre)} />}
+                    />
                     <Route exact path="/login"
                            render = {(props) =>
                                <Login {...props} onSubmit={(nombre) => this.handleLogin(nombre)} />}
