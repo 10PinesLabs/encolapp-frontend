@@ -3,8 +3,8 @@ import { List, Header, Container } from 'semantic-ui-react'
 
 class PorHablar extends Component {
     listaPorHablar(esperando){
+        console.log('Todos:',esperando);
         return esperando.map( enEspera =>
-
             <List.Item key={enEspera.nombre}>
                 <List.Icon name='github' size='large' />
                 <List.Content>
@@ -12,8 +12,6 @@ class PorHablar extends Component {
                     <List.Description as='span'>Esperando hace {enEspera.tiempo} minutos</List.Description>
                 </List.Content>
             </List.Item>
-
-
         );
 
     }
