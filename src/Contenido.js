@@ -20,16 +20,15 @@ class Contenido extends Component {
                 {"nombre": "Hardcoded 3", "tiempo": 2}
             ],
         };
-        window.setInterval(() => this.actualizarCola(), 1000);
-
     }
 
     actualizarCola(){
-        fetch(Config.API_ENDPOINT + '/cola', {method: 'GET'})
+        fetch(Config.API_ENDPOINT + '/estado_actual', {method: 'GET'})
             .then(response => {
                 return response.json();
             })
             .then(lista => {
+                lista = lista.cola;
                 if( lista.length === 0){
                     this.setState({
                         siguientes : [],
@@ -42,6 +41,8 @@ class Contenido extends Component {
                     hablando :  lista[0],
                     siguientes : lista.slice(1, lista.size)
                 });
+            }).catch().then(() => {
+                this.actualizarCola();
             });
     }
 
