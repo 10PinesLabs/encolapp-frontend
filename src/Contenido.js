@@ -12,13 +12,10 @@ class Contenido extends Component {
         super(props);
         this.state = {
             hablando: {
-                "nombre": "Hardcoded 1",
-                "para": 5
+                "nombre": "",
             },
             siguientes: [
-                {"nombre": "Hardcoded 1", "tiempo": 8},
-                {"nombre": "Hardcoded 2", "tiempo": 4},
-                {"nombre": "Hardcoded 3", "tiempo": 2}
+                {"nombre": "Hardcoded 1"},
             ],
         };
     }

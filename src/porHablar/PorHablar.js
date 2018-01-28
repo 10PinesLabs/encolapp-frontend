@@ -5,9 +5,9 @@ class PorHablar extends Component {
     listaPorHablar(esperando){
         return esperando.map( enEspera =>
             <List.Item key={enEspera.nombre}>
-                <List.Icon name='github' size='large' />
+                <List.Icon name='tree' size='large' color='green'/>
                 <List.Content>
-                    <List.Header as='a'>{enEspera.nombre}</List.Header>
+                    <List.Header>{enEspera.nombre}</List.Header>
                 </List.Content>
             </List.Item>
         );
