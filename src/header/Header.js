@@ -4,7 +4,7 @@ import { Label, Icon, Segment, Header } from 'semantic-ui-react';
 
 export default class EncolappHeader extends Component {
     seQuienEs(){
-        return this.props.soy !== '';
+        return this.props.soy && typeof  this.props.soy !== 'undefined' ;
     }
 
     renderHeaderConNombre(){
@@ -20,12 +20,14 @@ export default class EncolappHeader extends Component {
     }
 
     renderHeaderConLogin(){
-        return <Segment raised>
-            <Header as='h1' className="ui header">
-                EnColaPP
-                <Link to='/login'> <Icon name='sign in' color='black'/> </Link>
-            </Header>
-        </Segment>
+        return (
+            <Segment raised>
+                <Header as='h1' className="ui header">
+                    EnColaPP
+                    <Link to='/login'> <Icon name='sign in' color='black'/> </Link>
+                </Header>
+            </Segment>
+        );
     }
 
 

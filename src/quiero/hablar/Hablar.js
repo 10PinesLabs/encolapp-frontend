@@ -42,7 +42,7 @@ export default class Hablar extends Component {
     render() {
         return (
             <div className="Accion">
-                <Button primary onClick={() => this.handleClick()} size={'massive'}>{this.state.accion}</Button>
+                <Button onClick={() => this.handleClick()} size='huge' color='red' content={this.state.accion} icon='microphone'/>
             </div>
         );
     }

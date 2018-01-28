@@ -1,5 +1,6 @@
 import React from 'react'
-import {Button, Form, Grid, Header, Message, Segment} from 'semantic-ui-react'
+import {Button, Form, Grid, Message, Segment} from 'semantic-ui-react'
+import HeaderEncolapp from '../header/Header';
 
 export default class LoginForm extends React.Component {
     constructor(props){
@@ -16,13 +17,9 @@ export default class LoginForm extends React.Component {
     render() {
         return (
             <div className='login-form'>
-                <Grid
-                    textAlign='center'
-                    style={{height: '100%'}}
-                    verticalAlign='middle'
-                >
+                <Grid textAlign='center'>
                     <Grid.Column style={{maxWidth: 450}}>
-                        <Header as='h2' textAlign='center'>Entrar</Header>
+                        <HeaderEncolapp />
                         <Form size='large' onSubmit={(e) => this.handleOnSubmit(e)}>
                             <Segment stacked>
                                 <Form.Input
@@ -32,11 +29,11 @@ export default class LoginForm extends React.Component {
                                     placeholder='Soy'
                                     onChange={(e) => this.nombre =  e.target.value}
                                 />
-                                <Button color='blue' fluid size='large'>A la reunión!</Button>
+                                <Button color='green' fluid size='large'>A la reunión!</Button>
                             </Segment>
                         </Form>
                         <Message>
-                            Esta es una aplicación que hicimos un sábado... asi que be nice :)
+                            Con una aplicación rápida viene una gran responsabilidad...
                         </Message>
                     </Grid.Column>
                 </Grid>
