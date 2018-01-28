@@ -4,7 +4,8 @@ import './App.css';
 import Hablando from './hablando/Hablando';
 import PorHablar from './porHablar/PorHablar';
 import Quiero from './quiero/Quiero';
-import {Grid, Divider, Header} from 'semantic-ui-react';
+import EncolappHeader from  './header/Header';
+import {Grid} from 'semantic-ui-react';
 
 class Contenido extends Component {
     constructor(props) {
@@ -53,10 +54,11 @@ class Contenido extends Component {
     render() {
         return (
             <div className="App">
-                <Header as='h1' className="ui header">EnColaPP</Header>
-                <Divider/>
-
+                <EncolappHeader soy={this.props.soy}/>
                 <Grid centered>
+                    <Grid.Row>
+                        <Quiero soy={this.props.soy}/>
+                    </Grid.Row>
                     <Grid.Row>
                         <Hablando quien={this.state.hablando}/>
                     </Grid.Row>
@@ -64,9 +66,6 @@ class Contenido extends Component {
                         <Grid.Column>
                             <PorHablar esperando={this.state.siguientes}/>
                         </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Quiero soy={this.props.soy}/>
                     </Grid.Row>
                 </Grid>
 
