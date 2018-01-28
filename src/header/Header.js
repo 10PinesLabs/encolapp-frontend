@@ -9,7 +9,7 @@ export default class EncolappHeader extends Component {
 
     renderHeaderConNombre(){
         return (
-            <Segment raised>
+            <Segment>
                 <Label attached='top'>
                     <Icon name='id badge'/>
                     {this.props.soy}
@@ -20,11 +20,13 @@ export default class EncolappHeader extends Component {
     }
 
     renderHeaderConLogin(){
+        let blanco = {color: 'white'};
         return (
-            <Segment raised>
-                <Header as='h1' className="ui header">
-                    EnColaPP
-                    <Link to='/login'> <Icon name='sign in' color='black'/> </Link>
+            <Segment inverted color='green'>
+                <Header className="ui header" size='large' color='grey'>
+                    <Link to='/login'>
+                        <span style={blanco}>EnColaPP</span>
+                     </Link>
                 </Header>
             </Segment>
         );

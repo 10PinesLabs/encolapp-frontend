@@ -6,7 +6,7 @@ export default class Ingresar extends Component {
     render() {
         return (
             <div>
-                <Label color='green' size='massive'>
+                <Label color='olive' size='massive'>
                     <Link to={'/login'}>
                         Para hablar
                         <Icon name='sign in'/>

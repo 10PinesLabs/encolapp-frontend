@@ -27,9 +27,9 @@ export default class LoginForm extends React.Component {
                                     icon='user'
                                     iconPosition='left'
                                     placeholder='Soy'
-                                    onChange={(e) => this.nombre =  e.target.value}
+                                    onChange={(e) => this.nombre =  e.target.value.trim()}
                                 />
-                                <Button color='green' fluid size='large'>A la reunión!</Button>
+                                <Button color='olive' fluid size='large'>A la reunión!</Button>
                             </Segment>
                         </Form>
                         <Message>

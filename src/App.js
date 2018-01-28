@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Login from './login/Login';
-import Contenido from './Contenido';
+import VistaLogueado from './VistaLogueado';
 
 export default class App extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ export default class App extends Component {
                     />
                     <Route exact path="/cola"
                             render = {(props) =>
-                                <Contenido {...props} soy={this.state.usuario}  />}
+                                <VistaLogueado {...props} soy={this.state.usuario}  />}
                     />
                 </div>
             </Router>

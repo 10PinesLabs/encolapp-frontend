@@ -8,7 +8,8 @@ export default class Hablar extends Component {
         this.state= {
             accion : 'Quiero hablar!',
             proximo : 'Ya no quiero',
-            evento: 'ENCOLARSE'
+            evento: 'ENCOLARSE',
+            buttonState:false
         };
     }
 
@@ -22,6 +23,8 @@ export default class Hablar extends Component {
             this.setState({evento : 'ENCOLARSE'});
         }
 
+        this.setState({buttonState: true});
+
         fetch(url, {
             method: 'POST',
             headers: {
@@ -31,7 +34,9 @@ export default class Hablar extends Component {
             body: JSON.stringify({
                 nombre: this.props.soy
             })
-        });
+        }).catch().then(
+            () => this.setState({buttonState: false})
+        );
 
         this.setState({
             accion : this.state.proximo ,
@@ -42,7 +47,10 @@ export default class Hablar extends Component {
     render() {
         return (
             <div className="Accion">
-                <Button onClick={() => this.handleClick()} size='huge' color='red' content={this.state.accion} icon='microphone'/>
+                <Button
+                    onClick={() => this.handleClick()}
+                    loading={this.state.buttonState}
+                    size='huge' color='red' content={this.state.accion} icon='microphone' labelPosition='left'/>
             </div>
         );
     }
