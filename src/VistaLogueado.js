@@ -4,7 +4,7 @@ import Hablando from './hablando/Hablando';
 import PorHablar from './porHablar/PorHablar';
 import Quiero from './quiero/Quiero';
 import EncolappHeader from './header/Header';
-import {Grid, Message} from 'semantic-ui-react';
+import {Grid} from 'semantic-ui-react';
 
 class VistaLogueado extends Component {
     constructor(props) {
@@ -52,11 +52,6 @@ class VistaLogueado extends Component {
                     </Grid.Row>
                     <Grid.Row>
                         <PorHablar esperando={this.state.siguientes}/>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Message>
-                            La lista de los que siguen puede demorar en actualizar, si nos regalas un pooling mas feliz sería menos confuso :)
-                        </Message>
                     </Grid.Row>
                 </Grid>
 
