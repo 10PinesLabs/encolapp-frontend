@@ -33,12 +33,23 @@ export default class ClienteDelBackend {
     this.handlerPorCambioDeEstadoDeSala = handler;
   }
 
-  encolar(speaker) {
-    this.eventBus.publish("roots.salon.encolar", JSON.stringify(speaker));
+  ingresar(nombre) {
+    this.eventBus.publish("roots.salon.entrar", this._comoSpeaker(nombre));
   }
 
-  desencolar(speaker) {
-    this.eventBus.publish("roots.salon.desencolar", JSON.stringify(speaker));
+  salir(nombre) {
+    this.eventBus.publish("roots.salon.salir", this._comoSpeaker(nombre));
   }
 
+  encolar(nombre) {
+    this.eventBus.publish("roots.salon.encolar", this._comoSpeaker(nombre));
+  }
+
+  desencolar(nombre) {
+    this.eventBus.publish("roots.salon.desencolar", this._comoSpeaker(nombre));
+  }
+
+  _comoSpeaker(nombre) {
+    return JSON.stringify({nombre});
+  }
 }

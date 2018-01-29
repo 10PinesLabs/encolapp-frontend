@@ -13,14 +13,11 @@ export default class Hablar extends Component {
     }
 
     handleClick(){
-      let speaker = {
-        nombre: this.props.soy
-      };
         if(this.state.evento === 'ENCOLARSE'){
-          this.props.cliente.encolar(speaker);
+          this.props.cliente.encolar(this.props.soy);
           this.setState({evento: 'DESENCOLARSE'});
         }else{
-          this.props.cliente.desencolar(speaker);
+          this.props.cliente.desencolar(this.props.soy);
           this.setState({evento: 'ENCOLARSE'});
         }
         this.setState({

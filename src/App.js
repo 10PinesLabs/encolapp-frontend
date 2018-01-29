@@ -15,6 +15,7 @@ export default class App extends Component {
 
     handleLogin(nombre){
         this.setState({usuario : nombre});
+      this.cliente.ingresar(nombre);
     }
 
     render() {
