@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, {Component} from 'react';
 
 import Hablar from './hablar/Hablar';
 import Ingresar from './ingresar/Ingresar';
@@ -11,7 +11,7 @@ export default class Quiero extends Component {
 
     render() {
         if(this.seQuienEs()){
-            return <Hablar soy={this.props.soy}/>;
+          return <Hablar soy={this.props.soy} cliente={this.props.cliente}/>;
         }else{
             return <Ingresar/>
         }

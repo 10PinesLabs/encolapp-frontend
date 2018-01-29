@@ -1,10 +1,9 @@
-import Config from './Config';
 import React, {Component} from 'react';
 import './App.css';
 import Hablando from './hablando/Hablando';
 import PorHablar from './porHablar/PorHablar';
 import Quiero from './quiero/Quiero';
-import EncolappHeader from  './header/Header';
+import EncolappHeader from './header/Header';
 import {Grid, Message} from 'semantic-ui-react';
 
 class VistaLogueado extends Component {
@@ -15,38 +14,30 @@ class VistaLogueado extends Component {
                 "nombre": "",
             },
             siguientes: [
-                {"nombre": "Hardcoded 1"},
+              {"nombre": "Sin pinos en la sala"},
             ],
         };
     }
 
-    actualizarCola(){
-        fetch(Config.API_ENDPOINT + '/estado_actual', {method: 'GET'})
-            .then(response => {
-                return response.json();
-            })
-            .then(lista => {
-                lista = lista.cola;
-                if( lista.length === 0){
-                    this.setState({
-                        siguientes : [],
-                        hablando :  {"nombre" : ''}
-                    });
-                    return;
-                }
+  componentDidMount() {
+    this.props.cliente.cuandoCambiaLaSala(this.onCambioDeEstadoDelSalon.bind(this));
+  }
 
-                this.setState({
-                    hablando :  lista[0],
-                    siguientes : lista.slice(1, lista.size)
-                });
-            }).catch().then(() => {
-                this.actualizarCola();
-            });
+  onCambioDeEstadoDelSalon(nuevoEstadoDeSala) {
+    let lista = nuevoEstadoDeSala.cola;
+    if (lista.length === 0) {
+      this.setState({
+        siguientes: [],
+        hablando: {"nombre": ''}
+      });
+      return;
     }
 
-    componentDidMount() {
-        this.actualizarCola();
-    }
+    this.setState({
+      hablando: lista[0],
+      siguientes: lista.slice(1, lista.size)
+    });
+  }
 
     render() {
         return (
@@ -54,7 +45,7 @@ class VistaLogueado extends Component {
                 <EncolappHeader soy={this.props.soy}/>
                 <Grid centered>
                     <Grid.Row>
-                        <Quiero soy={this.props.soy}/>
+                      <Quiero soy={this.props.soy} cliente={this.props.cliente}/>
                     </Grid.Row>
                     <Grid.Row>
                         <Hablando quien={this.state.hablando}/>

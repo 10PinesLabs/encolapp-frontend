@@ -1,6 +1,5 @@
-import React, { Component} from 'react';
-import Config from '../../Config';
-import { Button} from 'semantic-ui-react';
+import React, {Component} from 'react';
+import {Button} from 'semantic-ui-react';
 
 export default class Hablar extends Component {
     constructor(props){
@@ -14,30 +13,16 @@ export default class Hablar extends Component {
     }
 
     handleClick(){
-        let url;
+      let speaker = {
+        nombre: this.props.soy
+      };
         if(this.state.evento === 'ENCOLARSE'){
-            url = Config.API_ENDPOINT + '/encolarse';
-            this.setState({evento : 'DESENCOLARSE'});
+          this.props.cliente.encolar(speaker);
+          this.setState({evento: 'DESENCOLARSE'});
         }else{
-            url = Config.API_ENDPOINT + '/desencolarse';
-            this.setState({evento : 'ENCOLARSE'});
+          this.props.cliente.desencolar(speaker);
+          this.setState({evento: 'ENCOLARSE'});
         }
-
-        this.setState({buttonState: true});
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                nombre: this.props.soy
-            })
-        }).catch().then(
-            () => this.setState({buttonState: false})
-        );
-
         this.setState({
             accion : this.state.proximo ,
             proximo: this.state.accion
