@@ -2,17 +2,9 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Login from './login/Login';
 import VistaLogueado from './VistaLogueado';
-import EventBus from 'vertx3-eventbus-client';
+import ClienteDelBackend from './comunicacion/ClienteDelBackend';
 
-let eventBus = new EventBus('http://localhost:8080/eventbus');
-eventBus.onopen = function () {
-  eventBus.registerHandler('auction.1.price', function (error, message) {
-    console.log('EUR ' + JSON.parse(message.body));
-  });
-  eventBus.registerHandler('auction.1.bid', function (error, message) {
-    console.log('New offer: EUR ' + JSON.parse(message.body).price + '\n');
-  });
-};
+let cliente = new ClienteDelBackend();
 
 export default class App extends Component {
     constructor(props) {
@@ -32,11 +24,11 @@ export default class App extends Component {
                 <div>
                     <Route exact path="/"
                            render = {(props) =>
-                               <Login {...props} onSubmit={(nombre) => this.handleLogin(nombre)} />}
+                             <Login {...props} cliente={cliente} onSubmit={(nombre) => this.handleLogin(nombre)}/>}
                     />
                     <Route exact path="/login"
                            render = {(props) =>
-                               <Login {...props} onSubmit={(nombre) => this.handleLogin(nombre)} />}
+                             <Login {...props} cliente={cliente} onSubmit={(nombre) => this.handleLogin(nombre)}/>}
                     />
                     <Route exact path="/cola"
                             render = {(props) =>
