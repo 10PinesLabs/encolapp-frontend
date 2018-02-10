@@ -6,52 +6,52 @@ import HeaderConSpeaker from '../header/HeaderConSpeaker';
 import {Grid} from 'semantic-ui-react';
 import BotonParaDesencolar from "../secciones/BotonParaDesencolar";
 import BotonParaEncolar from "../secciones/BotonParaEncolar";
+import {Sidebar, Segment, Menu} from 'semantic-ui-react'
 
 class VistaLogueado extends Component {
   constructor(props) {
     super(props);
     this.cliente = props.cliente;
     this.state = {
-      hablando: {
-        "nombre": "",
-      },
-      siguientes: [
-        {"nombre": "Sin pinos en la sala"},
-      ],
+      presentesVisibles: false
     };
-  }
-
-
-  onCambioDeEstadoDelSalon(nuevoEstadoDeSala) {
-    let lista = nuevoEstadoDeSala.cola;
-    if (lista.length === 0) {
-      this.setState({
-        siguientes: [],
-        hablando: {"nombre": ''}
-      });
-      return;
-    }
-
-    this.setState({
-      hablando: lista[0],
-      siguientes: lista.slice(1, lista.size)
-    });
   }
 
   render() {
     return (
-      <div className="App">
-        <HeaderConSpeaker speaker={this.props.speaker}/>
-        <Grid centered>
-          <Grid.Row>
-            {this.mostrarBotonQueCorresponde()}
-          </Grid.Row>
-          {this.mostrarSpeakerActualSiExiste()}
-          <Grid.Row>
-            <ColaDeEspera speakers={this.props.salon.speakersEnCola}/>
-          </Grid.Row>
-        </Grid>
-      </div>
+
+      <Sidebar.Pushable as={Segment}>
+        <Sidebar
+          as={Menu}
+          animation='overlay'
+          width='thin'
+          direction='right'
+          visible={this.state.presentesVisibles}
+          icon='labeled'
+          vertical
+          inverted
+        >
+          {this.renderizarPresentes()}
+        </Sidebar>
+        <Sidebar.Pusher>
+          <Segment basic>
+
+            <div className="App">
+              <HeaderConSpeaker speaker={this.props.speaker} onPresentesApretado={()=> this.togglearPresentes()} />
+              <Grid centered>
+                <Grid.Row>
+                  {this.mostrarBotonQueCorresponde()}
+                </Grid.Row>
+                {this.mostrarSpeakerActualSiExiste()}
+                <Grid.Row>
+                  <ColaDeEspera speakers={this.props.salon.speakersEnCola}/>
+                </Grid.Row>
+              </Grid>
+            </div>
+
+          </Segment>
+        </Sidebar.Pusher>
+      </Sidebar.Pushable>
     );
   }
 
@@ -84,6 +84,18 @@ class VistaLogueado extends Component {
         </Grid.Row>
       );
     }
+  }
+
+  togglearPresentes() {
+    this.setState({presentesVisibles: !this.state.presentesVisibles});
+  }
+
+  renderizarPresentes() {
+    return this.props.salon.presentes.map(presente =>
+      <Menu.Item name={presente.nombre}>
+        {presente.nombre}
+      </Menu.Item>
+    );
   }
 }
 
