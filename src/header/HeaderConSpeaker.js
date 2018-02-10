@@ -17,7 +17,8 @@ export default class HeaderConSpeaker extends Component {
           <Icon name='id badge'/>
           {this.props.speaker.nombre}
         </Label>
-        <Header as='h1' className="ui header">EnColaPP <Button content="Presentes" onClick={this.props.onPresentesApretado} />  </Header>
+        <Header as='h1' className="ui header"> <Button content="Presentes"
+                                                       onClick={this.props.onPresentesApretado}/> EnColaPP </Header>
       </Segment>
     );
   }
