@@ -13,13 +13,17 @@ export default class HeaderConSpeaker extends Component {
   render() {
     return (
       <Segment>
-        <Label attached='top'>
+        <Label attached='top' onClick={(event) => this.onTopLabelApretado(event)}>
           <Icon name='id badge'/>
           {this.props.speaker.nombre}
         </Label>
-        <Header as='h1' className="ui header"> <Button content="Presentes"
-                                                       onClick={this.props.onPresentesApretado}/> EnColaPP </Header>
+        <Header as='h1' className="ui header"> EnColaPP </Header>
       </Segment>
     );
+  }
+
+  onTopLabelApretado(event) {
+    event.preventDefault();
+    this.props.onPresentesApretado()
   }
 }
