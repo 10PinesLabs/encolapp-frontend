@@ -5,12 +5,16 @@ import HeaderSinSpeaker from "../header/HeaderSinSpeaker";
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {nombre: ''};
+    this.state = {
+      nombre: this.intentarRecuperarNombreDeLocalStorage()
+    };
   }
 
   handleOnSubmit(e) {
     e.preventDefault();
-    this.props.onSpeakerDefinido({nombre: this.state.nombre});
+    let nombreElegido = this.state.nombre;
+    this.intentarAlmacenarNombreEnLocalStorage(nombreElegido);
+    this.props.onSpeakerDefinido({nombre: nombreElegido});
   }
 
   render() {
@@ -22,6 +26,7 @@ export default class LoginForm extends React.Component {
             <Form size='large' onSubmit={(e) => this.handleOnSubmit(e)}>
               <Segment stacked>
                 <Form.Input
+                  value={this.state.nombre}
                   fluid
                   icon='user'
                   iconPosition='left'
@@ -37,6 +42,18 @@ export default class LoginForm extends React.Component {
           </Grid.Column>
         </Grid>
       </div>);
+  }
+
+  intentarRecuperarNombreDeLocalStorage() {
+    if (localStorage) {
+      let nombreAlmacenado = localStorage.getItem("nombreDeSpeaker");
+      return nombreAlmacenado;
+    }
+    return undefined;
+  }
+
+  intentarAlmacenarNombreEnLocalStorage(nombre) {
+    localStorage.setItem("nombreDeSpeaker", nombre);
   }
 
 }
