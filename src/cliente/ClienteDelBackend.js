@@ -14,10 +14,14 @@ export default class ClienteDelBackend {
 
     return new Promise((resolve) => {
       const eventBus = new EventBus(direccionWebsockets);
+      eventBus.enableReconnect(true);
       eventBus.onopen = () => {
         console.log('Conectado');
         eventBus.registerHandler('roots.salon.cambio', this._onMensajeDeCambioDeEstadoDeSala.bind(this));
         resolve(eventBus);
+      };
+      eventBus.onreconnect = () => {
+        console.log('Re-Conectado');
       };
     });
   }
