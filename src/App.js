@@ -30,8 +30,9 @@ export default class App extends Component {
   }
 
   ingresarASala(speaker) {
-    this.cliente.cuandoCambiaLaSala((salon) => this.setState({salon: salon}));
-    this.cliente.ingresar(speaker);
-    return this.setState({speaker: speaker});
+    this.cliente.ingresar(speaker).then(() => {
+      this.cliente.observarSalon((salon) => this.setState({salon: salon}));
+      this.setState({speaker: speaker});
+    });
   }
 }

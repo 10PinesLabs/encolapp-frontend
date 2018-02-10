@@ -9,16 +9,19 @@ export default class ClienteDelBackend {
   }
 
   crearEventbus() {
-    let direccionWebsockets = `${Config.API_ENDPOINT}/eventbus`;
+    const direccionWebsockets = `${Config.API_ENDPOINT}/eventbus`;
     console.log(`Creando event bus a ${direccionWebsockets}`);
 
-    let eventBus = new EventBus(direccionWebsockets);
-    eventBus.onopen = () => {
-      console.log('Conectado');
-      eventBus.registerHandler('roots.salon.cambio', this._onMensajeDeCambioDeEstadoDeSala.bind(this));
-    };
-    return eventBus;
+    return new Promise((resolve) => {
+      const eventBus = new EventBus(direccionWebsockets);
+      eventBus.onopen = () => {
+        console.log('Conectado');
+        eventBus.registerHandler('roots.salon.cambio', this._onMensajeDeCambioDeEstadoDeSala.bind(this));
+        resolve(eventBus);
+      };
+    });
   }
+
 
   _onMensajeDeCambioDeEstadoDeSala(error, message) {
     let body = message.body;
@@ -31,24 +34,32 @@ export default class ClienteDelBackend {
     }
   }
 
-  cuandoCambiaLaSala(handler) {
+  observarSalon(handler) {
     this.handlerPorCambioDeEstadoDeSala = handler;
   }
 
   ingresar(speaker) {
-    this.eventBus.publish("roots.salon.entrar", this._comoString(speaker));
+    return this.eventBus.then(bus => {
+      bus.publish("roots.salon.entrar", this._comoString(speaker))
+    });
   }
 
   salir(speaker) {
-    this.eventBus.publish("roots.salon.salir", this._comoString(speaker));
+    return this.eventBus.then(bus => {
+      bus.publish("roots.salon.salir", this._comoString(speaker));
+    });
   }
 
   encolar(speaker) {
-    this.eventBus.publish("roots.salon.encolar", this._comoString(speaker));
+    return this.eventBus.then(bus => {
+      bus.publish("roots.salon.encolar", this._comoString(speaker));
+    });
   }
 
   desencolar(speaker) {
-    this.eventBus.publish("roots.salon.desencolar", this._comoString(speaker));
+    return this.eventBus.then(bus => {
+      bus.publish("roots.salon.desencolar", this._comoString(speaker));
+    });
   }
 
   _comoString(speaker) {

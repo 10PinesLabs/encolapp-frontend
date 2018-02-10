@@ -92,7 +92,7 @@ class VistaLogueado extends Component {
 
   renderizarPresentes() {
     return this.props.salon.presentes.map(presente =>
-      <Menu.Item name={presente.nombre}>
+      <Menu.Item key={presente.nombre}>
         {presente.nombre}
       </Menu.Item>
     );
