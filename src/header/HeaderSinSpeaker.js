@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { Label, Icon, Segment, Header } from 'semantic-ui-react';
+import { Segment, Header } from 'semantic-ui-react';
 
 export default class HeaderSinSpeaker extends Component {
     render() {

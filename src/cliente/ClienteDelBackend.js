@@ -1,6 +1,6 @@
 import EventBus from 'vertx3-eventbus-client';
 import Config from '../Config';
-import Salon from '../Salon';
+import Salon from '../model/Salon';
 
 export default class ClienteDelBackend {
   constructor() {

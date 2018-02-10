@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, Form, Grid, Message, Segment} from 'semantic-ui-react'
-import HeaderSinSpeaker from "../HeaderSinSpeaker";
+import HeaderSinSpeaker from "../header/HeaderSinSpeaker";
 
 export default class LoginForm extends React.Component {
   constructor(props) {

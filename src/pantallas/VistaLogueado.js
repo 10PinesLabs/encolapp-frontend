@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import './App.css';
-import Hablando from './hablando/Hablando';
-import ColaDeEspera from './ColaDeEspera';
-import Quiero from './quiero/Quiero';
-import HeaderConSpeaker from './HeaderConSpeaker';
+import '../App.css';
+import Hablando from '../secciones/Hablando';
+import ColaDeEspera from '../secciones/ColaDeEspera';
+import HeaderConSpeaker from '../header/HeaderConSpeaker';
 import {Grid} from 'semantic-ui-react';
-import BotonParaDesencolar from "./BotonParaDesencolar";
-import BotonParaEncolar from "./BotonParaEncolar";
+import BotonParaDesencolar from "../secciones/BotonParaDesencolar";
+import BotonParaEncolar from "../secciones/BotonParaEncolar";
 
 class VistaLogueado extends Component {
   constructor(props) {

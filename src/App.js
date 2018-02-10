@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Login from './login/Login';
-import VistaLogueado from './VistaLogueado';
-import ClienteDelBackend from './comunicacion/ClienteDelBackend';
+import Login from './pantallas/Login';
+import VistaLogueado from './pantallas/VistaLogueado';
+import ClienteDelBackend from './cliente/ClienteDelBackend';
 
 export default class App extends Component {
   constructor(props) {
