@@ -1,5 +1,4 @@
 import React, { Component} from 'react';
-import {Link} from 'react-router-dom';
 import { Label, Icon, Segment, Header } from 'semantic-ui-react';
 
 export default class EncolappHeader extends Component {
@@ -24,9 +23,7 @@ export default class EncolappHeader extends Component {
         return (
             <Segment inverted color='green'>
                 <Header className="ui header" size='large' color='grey'>
-                    <Link to='/login'>
-                        <span style={blanco}>EnColaPP</span>
-                     </Link>
+                    <span style={blanco}>EnColaPP</span>
                 </Header>
             </Segment>
         );

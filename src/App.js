@@ -1,41 +1,37 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Login from './login/Login';
 import VistaLogueado from './VistaLogueado';
 import ClienteDelBackend from './comunicacion/ClienteDelBackend';
 
 export default class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          usuario : ''
-        };
-      this.cliente = new ClienteDelBackend();
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      speaker: null,
+      salon: null,
+    };
+    this.cliente = new ClienteDelBackend();
+  }
 
-    handleLogin(nombre){
-        this.setState({usuario : nombre});
-      this.cliente.ingresar(nombre);
+  render() {
+    if (!this.state.speaker) {
+      return (
+        <Login onSpeakerDefinido={(speaker) => this.ingresarASala(speaker)}/>
+      );
+    } else if(!this.state.salon) {
+      return(
+        <img src='https://i.makeagif.com/media/7-14-2015/QN3_hB.gif' width="100%" height="100%" alt="Aguanta"/>
+      )
+    } else {
+      return(
+        <VistaLogueado speaker={this.state.speaker} salon={this.state.salon} cliente={this.cliente}/>
+      )
     }
+  }
 
-    render() {
-        return (
-            <Router>
-                <div>
-                    <Route exact path="/"
-                           render = {(props) =>
-                             <Login {...props} onSubmit={(nombre) => this.handleLogin(nombre)}/>}
-                    />
-                    <Route exact path="/login"
-                           render = {(props) =>
-                             <Login {...props} onSubmit={(nombre) => this.handleLogin(nombre)}/>}
-                    />
-                    <Route exact path="/cola"
-                            render = {(props) =>
-                              <VistaLogueado cliente={this.cliente} {...props} soy={this.state.usuario}/>}
-                    />
-                </div>
-            </Router>
-        );
-    }
+  ingresarASala(speaker) {
+    this.cliente.cuandoCambiaLaSala((salon) => this.setState({salon: salon}));
+    this.cliente.ingresar(speaker);
+    return this.setState({speaker: speaker});
+  }
 }

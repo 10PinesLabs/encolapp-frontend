@@ -1,5 +1,6 @@
 import EventBus from 'vertx3-eventbus-client';
 import Config from '../Config';
+import Salon from '../Salon';
 
 export default class ClienteDelBackend {
   constructor() {
@@ -13,17 +14,18 @@ export default class ClienteDelBackend {
 
     let eventBus = new EventBus(direccionWebsockets);
     eventBus.onopen = () => {
-      eventBus.registerHandler('roots.salon.cambio', this._onCambioDeEstadoDeSala.bind(this));
+      console.log('Conectado');
+      eventBus.registerHandler('roots.salon.cambio', this._onMensajeDeCambioDeEstadoDeSala.bind(this));
     };
     return eventBus;
   }
 
-  _onCambioDeEstadoDeSala(error, message) {
+  _onMensajeDeCambioDeEstadoDeSala(error, message) {
     let body = message.body;
     console.log(`Cambio de estado de salon: ${body}`);
     if (this.handlerPorCambioDeEstadoDeSala) {
       let nuevoEstado = JSON.parse(body);
-      this.handlerPorCambioDeEstadoDeSala(nuevoEstado);
+      this.handlerPorCambioDeEstadoDeSala(new Salon(nuevoEstado));
     } else {
       console.log('Ignorando por falta de handler')
     }
@@ -33,23 +35,23 @@ export default class ClienteDelBackend {
     this.handlerPorCambioDeEstadoDeSala = handler;
   }
 
-  ingresar(nombre) {
-    this.eventBus.publish("roots.salon.entrar", this._comoSpeaker(nombre));
+  ingresar(speaker) {
+    this.eventBus.publish("roots.salon.entrar", this._comoString(speaker));
   }
 
-  salir(nombre) {
-    this.eventBus.publish("roots.salon.salir", this._comoSpeaker(nombre));
+  salir(speaker) {
+    this.eventBus.publish("roots.salon.salir", this._comoString(speaker));
   }
 
-  encolar(nombre) {
-    this.eventBus.publish("roots.salon.encolar", this._comoSpeaker(nombre));
+  encolar(speaker) {
+    this.eventBus.publish("roots.salon.encolar", this._comoString(speaker));
   }
 
-  desencolar(nombre) {
-    this.eventBus.publish("roots.salon.desencolar", this._comoSpeaker(nombre));
+  desencolar(speaker) {
+    this.eventBus.publish("roots.salon.desencolar", this._comoString(speaker));
   }
 
-  _comoSpeaker(nombre) {
-    return JSON.stringify({nombre});
+  _comoString(speaker) {
+    return JSON.stringify(speaker);
   }
 }

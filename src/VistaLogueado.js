@@ -1,27 +1,27 @@
 import React, {Component} from 'react';
 import './App.css';
 import Hablando from './hablando/Hablando';
-import PorHablar from './porHablar/PorHablar';
+import ColaDeEspera from './ColaDeEspera';
 import Quiero from './quiero/Quiero';
-import EncolappHeader from './header/Header';
+import HeaderConSpeaker from './HeaderConSpeaker';
 import {Grid} from 'semantic-ui-react';
+import BotonParaDesencolar from "./BotonParaDesencolar";
+import BotonParaEncolar from "./BotonParaEncolar";
 
 class VistaLogueado extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            hablando: {
-                "nombre": "",
-            },
-            siguientes: [
-              {"nombre": "Sin pinos en la sala"},
-            ],
-        };
-    }
-
-  componentDidMount() {
-    this.props.cliente.cuandoCambiaLaSala(this.onCambioDeEstadoDelSalon.bind(this));
+  constructor(props) {
+    super(props);
+    this.cliente = props.cliente;
+    this.state = {
+      hablando: {
+        "nombre": "",
+      },
+      siguientes: [
+        {"nombre": "Sin pinos en la sala"},
+      ],
+    };
   }
+
 
   onCambioDeEstadoDelSalon(nuevoEstadoDeSala) {
     let lista = nuevoEstadoDeSala.cola;
@@ -39,26 +39,53 @@ class VistaLogueado extends Component {
     });
   }
 
-    render() {
-        return (
-            <div className="App">
-                <EncolappHeader soy={this.props.soy}/>
-                <Grid centered>
-                    <Grid.Row>
-                      <Quiero soy={this.props.soy} cliente={this.props.cliente}/>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Hablando quien={this.state.hablando}/>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <PorHablar esperando={this.state.siguientes}/>
-                    </Grid.Row>
-                </Grid>
+  render() {
+    return (
+      <div className="App">
+        <HeaderConSpeaker speaker={this.props.speaker}/>
+        <Grid centered>
+          <Grid.Row>
+            {this.mostrarBotonQueCorresponde()}
+          </Grid.Row>
+          {this.mostrarSpeakerActualSiExiste()}
+          <Grid.Row>
+            <ColaDeEspera speakers={this.props.salon.speakersEnCola}/>
+          </Grid.Row>
+        </Grid>
+      </div>
+    );
+  }
 
+  mostrarBotonQueCorresponde() {
+    if (this.props.salon.estaEnCola(this.props.speaker)) {
+      return (
+        <BotonParaDesencolar onYaNoQuiereHablar={() => this.quitarSpeakerDeLaCola()}/>
+      )
+    } else {
 
-            </div>
-        );
+      return (
+        <BotonParaEncolar onQuiereHablar={() => this.agregarSpeakerALaCola()}/>
+      )
     }
+  }
+
+  agregarSpeakerALaCola() {
+    this.cliente.encolar(this.props.speaker);
+  }
+
+  quitarSpeakerDeLaCola() {
+    this.cliente.desencolar(this.props.speaker);
+  }
+
+  mostrarSpeakerActualSiExiste() {
+    if (this.props.salon.speakerActual) {
+      return (
+        <Grid.Row>
+          <Hablando quien={this.props.salon.speakerActual}/>
+        </Grid.Row>
+      );
+    }
+  }
 }
 
 export default VistaLogueado;
