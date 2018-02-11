@@ -1,6 +1,7 @@
 import EventBus from 'vertx3-eventbus-client';
 import Config from '../Config';
 import Salon from '../model/Salon';
+import Mensajes from '../cliente/Mensajes';
 
 export default class ClienteDelBackend {
   constructor() {
@@ -17,7 +18,7 @@ export default class ClienteDelBackend {
       eventBus.enableReconnect(true);
       eventBus.onopen = () => {
         console.log('Conectado');
-        eventBus.registerHandler('roots.salon.cambio', this._onMensajeDeCambioDeEstadoDeSala.bind(this));
+        eventBus.registerHandler(Mensajes.CAMBIOS_EN_SALON, this._onMensajeDeCambioDeEstadoDeSala.bind(this));
         resolve(eventBus);
       };
       eventBus.onreconnect = () => {
@@ -44,25 +45,25 @@ export default class ClienteDelBackend {
 
   ingresar(speaker) {
     return this.eventBus.then(bus => {
-      bus.publish("roots.salon.entrar", this._comoString(speaker))
+      bus.publish(Mensajes.ENTRAR_EN_SALON, this._comoString(speaker))
     });
   }
 
   salir(speaker) {
     return this.eventBus.then(bus => {
-      bus.publish("roots.salon.salir", this._comoString(speaker));
+      bus.publish(Mensajes.SALIR_DE_SALON, this._comoString(speaker));
     });
   }
 
   encolar(speaker) {
     return this.eventBus.then(bus => {
-      bus.publish("roots.salon.encolar", this._comoString(speaker));
+      bus.publish(Mensajes.ENCOLAR, this._comoString(speaker));
     });
   }
 
   desencolar(speaker) {
     return this.eventBus.then(bus => {
-      bus.publish("roots.salon.desencolar", this._comoString(speaker));
+      bus.publish(Mensajes.DESENCOLAR, this._comoString(speaker));
     });
   }
 

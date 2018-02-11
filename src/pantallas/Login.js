@@ -47,7 +47,7 @@ export default class LoginForm extends React.Component {
   intentarRecuperarNombreDeLocalStorage() {
     if (localStorage) {
       let nombreAlmacenado = localStorage.getItem("nombreDeSpeaker");
-      return nombreAlmacenado;
+      return nombreAlmacenado || '';
     }
     return undefined;
   }

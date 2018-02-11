@@ -6,9 +6,9 @@ export default class HeaderConSpeaker extends Component {
   render() {
     return (
       <Segment>
-        <Label attached='top' onClick={(event) => this.onTopLabelApretado(event)}>
+        <Label className="clickeable" attached='top' onClick={(event) => this.onTopLabelApretado(event)}>
           <Icon name='id badge'/>
-          {this.props.speaker.nombre}
+          {this.props.speaker.nombre} y otros...
         </Label>
         <Header as='h1' className="ui header"> EnColaPP </Header>
       </Segment>
