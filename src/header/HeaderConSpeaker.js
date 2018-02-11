@@ -8,7 +8,7 @@ export default class HeaderConSpeaker extends Component {
       <Segment>
         <Label className="clickeable" attached='top' onClick={(event) => this.onTopLabelApretado(event)}>
           <Icon name='id badge'/>
-          {this.props.speaker.nombre} y otros...
+          {this.props.speaker.nombre} en la sala...
         </Label>
         <Header as='h1' className="ui header"> EnColaPP </Header>
       </Segment>

@@ -1,6 +1,6 @@
 import EventBus from 'vertx3-eventbus-client';
 import Config from '../Config';
-import Salon from '../model/Salon';
+import Salon from '../model/Sala';
 import Mensajes from '../cliente/Mensajes';
 
 export default class ClienteDelBackend {
@@ -18,7 +18,7 @@ export default class ClienteDelBackend {
       eventBus.enableReconnect(true);
       eventBus.onopen = () => {
         console.log('Conectado');
-        eventBus.registerHandler(Mensajes.CAMBIOS_EN_SALON, this._onMensajeDeCambioDeEstadoDeSala.bind(this));
+        eventBus.registerHandler(Mensajes.CAMBIOS_EN_SALA, this._onMensajeDeCambioDeEstadoDeSala.bind(this));
         resolve(eventBus);
       };
       eventBus.onreconnect = () => {
@@ -39,19 +39,19 @@ export default class ClienteDelBackend {
     }
   }
 
-  observarSalon(handler) {
+  observarSala(handler) {
     this.handlerPorCambioDeEstadoDeSala = handler;
   }
 
   ingresar(speaker) {
     return this.eventBus.then(bus => {
-      bus.publish(Mensajes.ENTRAR_EN_SALON, this._comoString(speaker))
+      bus.publish(Mensajes.ENTRAR_EN_SALA, this._comoString(speaker))
     });
   }
 
   salir(speaker) {
     return this.eventBus.then(bus => {
-      bus.publish(Mensajes.SALIR_DE_SALON, this._comoString(speaker));
+      bus.publish(Mensajes.SALIR_DE_SALA, this._comoString(speaker));
     });
   }
 

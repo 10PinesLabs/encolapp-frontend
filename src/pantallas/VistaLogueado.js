@@ -4,9 +4,8 @@ import Hablando from '../secciones/Hablando';
 import ColaDeEspera from '../secciones/ColaDeEspera';
 import HeaderConSpeaker from '../header/HeaderConSpeaker';
 import {Grid} from 'semantic-ui-react';
-import BotonParaDesencolar from "../secciones/BotonParaDesencolar";
-import BotonParaEncolar from "../secciones/BotonParaEncolar";
 import {Sidebar, Segment, Menu} from 'semantic-ui-react'
+import BotonDeAccion from "../secciones/BotonDeAccion";
 
 class VistaLogueado extends Component {
   constructor(props) {
@@ -44,7 +43,7 @@ class VistaLogueado extends Component {
                 </Grid.Row>
                 {this.mostrarSpeakerActualSiExiste()}
                 <Grid.Row>
-                  <ColaDeEspera speakers={this.props.salon.speakersEnCola}/>
+                  <ColaDeEspera speakers={this.props.sala.speakersEnCola}/>
                 </Grid.Row>
               </Grid>
             </div>
@@ -56,16 +55,32 @@ class VistaLogueado extends Component {
   }
 
   mostrarBotonQueCorresponde() {
-    if (this.props.salon.estaEnCola(this.props.speaker)) {
-      return (
-        <BotonParaDesencolar onYaNoQuiereHablar={() => this.quitarSpeakerDeLaCola()}/>
-      )
+    let opcionesDelBoton;
+    if (this.props.sala.estaHablando(this.props.speaker)) {
+      opcionesDelBoton = {
+        onBotonApretado: () => this.quitarSpeakerDeLaCola(),
+        color: 'red',
+        label: 'Termine',
+        icon: 'mute'
+      };
+    } else if (this.props.sala.estaEnCola(this.props.speaker)) {
+      opcionesDelBoton = {
+        onBotonApretado: () => this.quitarSpeakerDeLaCola(),
+        color: 'red',
+        label: 'Ya no quiero',
+        icon: 'mute'
+      };
     } else {
-
-      return (
-        <BotonParaEncolar onQuiereHablar={() => this.agregarSpeakerALaCola()}/>
-      )
+      opcionesDelBoton = {
+        onBotonApretado: () => this.agregarSpeakerALaCola(),
+        color: 'green',
+        label: 'Quero hablar',
+        icon: 'unmute'
+      };
     }
+    return (
+      <BotonDeAccion opciones={opcionesDelBoton}/>
+    )
   }
 
   agregarSpeakerALaCola() {
@@ -77,10 +92,10 @@ class VistaLogueado extends Component {
   }
 
   mostrarSpeakerActualSiExiste() {
-    if (this.props.salon.speakerActual) {
+    if (this.props.sala.speakerActual) {
       return (
         <Grid.Row>
-          <Hablando quien={this.props.salon.speakerActual}/>
+          <Hablando quien={this.props.sala.speakerActual}/>
         </Grid.Row>
       );
     }
@@ -91,7 +106,7 @@ class VistaLogueado extends Component {
   }
 
   renderizarPresentes() {
-    return this.props.salon.presentes.map(presente =>
+    return this.props.sala.presentes.map(presente =>
       <Menu.Item key={presente.nombre}>
         {presente.nombre}
       </Menu.Item>
