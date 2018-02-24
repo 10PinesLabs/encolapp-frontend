@@ -9,3 +9,7 @@ body > div > div,
 body > div > div > div.login-form {
   height: 100%;
 }
+
+.PorHablar {
+    width: 100%;
+}
