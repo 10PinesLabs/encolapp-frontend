@@ -22,7 +22,7 @@ class Hablando extends Component {
           <Card.Content extra>
             <div>
               <Button basic color='red' onClick={() => this.quitarSpeakerDeLaCola()} icon='remove user' content='Eject'/>
-              <Button basic color='green' onClick={() => this.pedirSpeakerQueTermine()} icon='fast forward' content='Redondeando!'/>
+              <Button basic color='green' onClick={() => this.pedirSpeakerQueTermine()} icon='history' content='Redondeando!'/>
             </div>
           </Card.Content>
         </Card>
