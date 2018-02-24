@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Button} from 'semantic-ui-react';
+import {Card, Button, Label, Icon} from 'semantic-ui-react';
 
 class Hablando extends Component {
     constructor(props) {
@@ -12,12 +12,17 @@ class Hablando extends Component {
       <div className="Hablando">
         <Card>
           <Card.Content>
-            <Card.Meta>Hablando</Card.Meta>
-            <Card.Header>{this.props.speaker.nombre}</Card.Header>
+            <Card.Header>
+                <Icon name="announcement"/>
+                {this.props.speaker.nombre}
+                <Label tag content={this.props.speaker.pedidosRedondeo} icon='history'/>
+            </Card.Header>
           </Card.Content>
+
           <Card.Content extra>
-            <div className='ui two buttons'>
-              <Button basic color='red' onClick={() => this.quitarSpeakerDeLaCola()}>Eject</Button>
+            <div>
+              <Button basic color='red' onClick={() => this.quitarSpeakerDeLaCola()} icon='remove user' content='Eject'/>
+              <Button basic color='green' onClick={() => this.pedirSpeakerQueTermine()} icon='fast forward' content='Redondeando!'/>
             </div>
           </Card.Content>
         </Card>
@@ -27,6 +32,10 @@ class Hablando extends Component {
 
     quitarSpeakerDeLaCola() {
       this.props.cliente.desencolar(this.props.speaker);
+    }
+
+    pedirSpeakerQueTermine(){
+        this.props.cliente.redondear(this.props.speaker);
     }
 }
 

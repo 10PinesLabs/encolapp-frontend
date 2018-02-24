@@ -67,6 +67,12 @@ export default class ClienteDelBackend {
     });
   }
 
+  redondear(speaker) {
+      return this.eventBus.then(bus => {
+          bus.publish(Mensajes.REDONDEAR, this._comoString(speaker));
+      });
+  }
+
   _comoString(speaker) {
     return JSON.stringify(speaker);
   }
