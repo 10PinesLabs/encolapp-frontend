@@ -11,14 +11,19 @@ class Hablando extends Component {
     return (
       <div className="Hablando">
         <Segment.Group compact>
-          <Segment >
+          <Segment size="small">
               <Header as='h3' floated='right' size="small">
-                <Icon
-                    size="small"
-                    name="remove user"
-                    color="grey"
-                    onClick={() => this.quitarSpeakerDeLaCola()}
-                />
+                  <Button as='div' labelPosition='right'>
+                      <Button icon>
+                          <Icon
+                              name="remove user"
+                              color="grey"
+                              onClick={() => this.quitarSpeakerDeLaCola()}
+                          />
+                      </Button>
+                      <Label as='a' basic pointing='left'>Eject</Label>
+                  </Button>
+
               </Header>
           </Segment>
             <Segment>
@@ -39,8 +44,8 @@ class Hablando extends Component {
   mostrarPedidosRedondeosSiHay() {
     if (this.props.speaking.pedidosRedondeo){
           return (
-            <Segment inverted >
-              <Label content={this.props.speaking.pedidosRedondeo} icon='history' size="huge"/>
+            <Segment>
+              <Label content={this.props.speaking.pedidosRedondeo} icon='history' size="huge" color="grey"/>
             </Segment>
           );
     }
