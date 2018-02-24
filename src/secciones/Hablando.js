@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Button, Label, Icon} from 'semantic-ui-react';
+import {Button, Label, Icon, Header, Segment} from 'semantic-ui-react';
 
 class Hablando extends Component {
     constructor(props) {
@@ -10,24 +10,40 @@ class Hablando extends Component {
   render() {
     return (
       <div className="Hablando">
-        <Card>
-          <Card.Content>
-            <Card.Header>
-                <Icon name="announcement"/>
-                {this.props.speaking.nombre}
-                <Label tag content={this.props.speaking.pedidosRedondeo} icon='history'/>
-            </Card.Header>
-          </Card.Content>
-
-          <Card.Content extra>
-            <div>
-              <Button basic color='red' onClick={() => this.quitarSpeakerDeLaCola()} icon='remove user' content='Eject'/>
-              <Button basic color='green' onClick={() => this.pedirSpeakerQueTermine()} icon='history' content='Redondeando!'/>
-            </div>
-          </Card.Content>
-        </Card>
+        <Segment.Group compact>
+          <Segment >
+              <Header as='h3' floated='right' size="small">
+                <Icon
+                    size="small"
+                    name="remove user"
+                    color="grey"
+                    onClick={() => this.quitarSpeakerDeLaCola()}
+                />
+              </Header>
+          </Segment>
+            <Segment>
+              <Header as='h2' floated='left'>
+                  <Icon name="announcement" bordered circular />
+                  {this.props.speaking.nombre}
+              </Header>
+          </Segment>
+          {this.mostrarPedidosRedondeosSiHay()}
+          <Segment>
+            <Button basic color='green' onClick={() => this.pedirSpeakerQueTermine()} icon='history' content='Redondeando!'/>
+        </Segment>
+        </Segment.Group>
       </div>
     );
+  }
+
+  mostrarPedidosRedondeosSiHay() {
+    if (this.props.speaking.pedidosRedondeo){
+          return (
+            <Segment inverted >
+              <Label content={this.props.speaking.pedidosRedondeo} icon='history' size="huge"/>
+            </Segment>
+          );
+    }
   }
 
     quitarSpeakerDeLaCola() {
