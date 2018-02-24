@@ -7,10 +7,10 @@ class ColaDeEspera extends Component {
     return speakers.map(enEspera =>
         <Grid.Row key={enEspera.nombre}>
             <Grid.Column width={3}>
-                <Identicon id={enEspera.nombre} width={20} size={3} />
+                <Identicon id={enEspera.nombre} width={30} size={3} />
             </Grid.Column>
-            <Grid.Column width={13}>
-                {enEspera.nombre}
+            <Grid.Column width={13} >
+                <Header size='large'> {enEspera.nombre} </Header>
             </Grid.Column>
         </Grid.Row>
     );
