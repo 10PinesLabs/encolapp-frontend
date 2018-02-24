@@ -21,7 +21,7 @@ export default class LoginForm extends React.Component {
     return (
       <div className='login-form'>
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
-          <Grid.Column style={{maxWidth: 450}}>
+          <Grid.Column style={{maxWidth: 380}}>
             <HeaderSinSpeaker/>
             <Form size='large' onSubmit={(e) => this.handleOnSubmit(e)}>
               <Segment stacked>
