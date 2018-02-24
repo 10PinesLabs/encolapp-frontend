@@ -60,7 +60,7 @@ class VistaLogueado extends Component {
       opcionesDelBoton = {
         onBotonApretado: () => this.quitarSpeakerDeLaCola(),
         color: 'red',
-        label: 'Termine',
+        label: 'Terminé',
         icon: 'mute'
       };
     } else if (this.props.sala.estaEnCola(this.props.speaker)) {
@@ -74,7 +74,7 @@ class VistaLogueado extends Component {
       opcionesDelBoton = {
         onBotonApretado: () => this.agregarSpeakerALaCola(),
         color: 'green',
-        label: 'Quero hablar',
+        label: 'Quiero hablar',
         icon: 'unmute'
       };
     }
@@ -95,7 +95,7 @@ class VistaLogueado extends Component {
     if (this.props.sala.speakerActual) {
       return (
         <Grid.Row>
-          <Hablando quien={this.props.sala.speakerActual}/>
+          <Hablando speaker={this.props.sala.speakerActual} cliente={this.props.cliente} />
         </Grid.Row>
       );
     }
