@@ -5,7 +5,7 @@ import Identicon from './IdentIcon';
 class ColaDeEspera extends Component {
   listaPorHablar(speakers) {
     return speakers.map(enEspera =>
-        <Grid.Row>
+        <Grid.Row key={enEspera.nombre}>
             <Grid.Column width={3}>
                 <Identicon id={enEspera.nombre} width={20} size={3} />
             </Grid.Column>
