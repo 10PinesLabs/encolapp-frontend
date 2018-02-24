@@ -24,7 +24,7 @@ class ColaDeEspera extends Component {
   render() {
     return (
       <div className="PorHablar">
-        <Segment padded compact color='olive' textAlign='center'>
+        <Segment color='olive' textAlign='center'>
           <Header
             as='h3'
             content='Siguen'
