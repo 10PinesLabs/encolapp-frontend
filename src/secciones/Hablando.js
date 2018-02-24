@@ -14,8 +14,8 @@ class Hablando extends Component {
           <Card.Content>
             <Card.Header>
                 <Icon name="announcement"/>
-                {this.props.speaker.nombre}
-                <Label tag content={this.props.speaker.pedidosRedondeo} icon='history'/>
+                {this.props.speaking.nombre}
+                <Label tag content={this.props.speaking.pedidosRedondeo} icon='history'/>
             </Card.Header>
           </Card.Content>
 
@@ -31,11 +31,11 @@ class Hablando extends Component {
   }
 
     quitarSpeakerDeLaCola() {
-      this.props.cliente.desencolar(this.props.speaker);
+      this.props.cliente.desencolar(this.props.speaking);
     }
 
     pedirSpeakerQueTermine(){
-        this.props.cliente.redondear(this.props.speaker);
+        this.props.cliente.redondear(this.props.speaker, this.props.speaking);
     }
 }
 

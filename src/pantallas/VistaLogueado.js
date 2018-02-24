@@ -95,7 +95,7 @@ class VistaLogueado extends Component {
     if (this.props.sala.speakerActual) {
       return (
         <Grid.Row>
-          <Hablando speaker={this.props.sala.speakerActual} cliente={this.props.cliente} />
+          <Hablando speaker={this.props.speaker} speaking={this.props.sala.speakerActual} cliente={this.props.cliente} />
         </Grid.Row>
       );
     }

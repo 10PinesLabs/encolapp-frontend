@@ -67,13 +67,23 @@ export default class ClienteDelBackend {
     });
   }
 
-  redondear(speaker) {
+  redondear(ortiba, denso) {
       return this.eventBus.then(bus => {
-          bus.publish(Mensajes.REDONDEAR, this._comoString(speaker));
+          bus.publish(Mensajes.REDONDEAR, this._pedidoComoString(ortiba, denso));
       });
   }
 
   _comoString(speaker) {
     return JSON.stringify(speaker);
   }
+
+  _pedidoComoString(origen, destino){
+    let pedido = {};
+    pedido.origen = origen;
+    pedido.destinatario = destino;
+    console.log(JSON.stringify(pedido));
+
+    return JSON.stringify(pedido);
+  }
+
 }
