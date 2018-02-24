@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
-import {List, Header, Container, Divider, Segment} from 'semantic-ui-react'
+import {Grid, Header, Container, Divider, Segment} from 'semantic-ui-react'
+import Identicon from './IdentIcon';
 
 class ColaDeEspera extends Component {
   listaPorHablar(speakers) {
     return speakers.map(enEspera =>
-      <List.Item key={enEspera.nombre}>
-        <List.Icon name='tree' size='large' color='green'/>
-        <List.Content>
-          <List.Header>{enEspera.nombre}</List.Header>
-        </List.Content>
-      </List.Item>
+        <Grid.Row>
+            <Grid.Column width={3}>
+                <Identicon id={enEspera.nombre} width={20} size={3} />
+            </Grid.Column>
+            <Grid.Column width={13}>
+                {enEspera.nombre}
+            </Grid.Column>
+        </Grid.Row>
     );
 
   }
@@ -28,9 +31,9 @@ class ColaDeEspera extends Component {
           />
           <Divider/>
           <Container>
-            <List divided relaxed size={'big'}>
-              {this.listaPorHablar(this.speakersEnEspera())}
-            </List>
+              <Grid celled>
+                  {this.listaPorHablar(this.speakersEnEspera())}
+              </Grid>
           </Container>
         </Segment>
       </div>
